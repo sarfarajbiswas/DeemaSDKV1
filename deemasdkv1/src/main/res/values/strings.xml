@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">deemasdkv1</string>
+    <string name="generalError">The service not available now, Please try again</string>
+
+</resources>
