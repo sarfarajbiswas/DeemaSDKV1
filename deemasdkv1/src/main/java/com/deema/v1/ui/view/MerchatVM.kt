@@ -20,7 +20,7 @@ enum class ApiResponse {None, Loading, Success, Error, NoInternet, UnAuthorize }
 
 data class UiState(
     val merchantRequestResponseData: MerchantRequestResponseData?= null,
-    val paymentSuccess: Int = 0,
+    val status: Int = 0,
     val errorMessage: String? = null,
     val apiResponse: ApiResponse = ApiResponse.None,
     )
@@ -32,17 +32,16 @@ class MerchantVM @Inject constructor(private val repository: RemoteDataSource) :
     var uiState = MutableStateFlow(UiState())
         private set
 
-
     fun changePaymentStatus(value: Int) {
         Timber.i("changePaymentStatus $value")
         viewModelScope.launch {
-            delay(4780)
-            uiState.update { it.copy(paymentSuccess = value) }
+            delay(500)
+            uiState.update { it.copy(status = value) }
         }
     }
 
-    fun loadMerchantData(request: MerchantRequest) {
-        Timber.i("loadMerchantData ${request}")
+    fun merchantDetails(request: MerchantRequest) {
+        Timber.i("loadMerchantData $request")
 
         viewModelScope.launch {
             repository.merchantDetails(request).collect { state ->
@@ -54,11 +53,7 @@ class MerchantVM @Inject constructor(private val repository: RemoteDataSource) :
                     }
 
                     is DataState.Error -> {
-                        //The account of {} phone number had been deleted!
                         val errorMessage = state.toString()
-                        viewModelScope.launch {
-                            EventBus.sendEvent(Event.ErrorToast(errorMessage))
-                        }
                         uiState.update { it.copy(errorMessage = errorMessage, apiResponse = ApiResponse.Error) }
                     }
 

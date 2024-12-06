@@ -9,22 +9,12 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
-
 @Module
 @InstallIn(SingletonComponent::class)
 object AppDataModule {
-//    @Singleton
-//    @Provides
-//    fun provideUserSettingsRepository(
-//        @ApplicationContext context: Context): UserSettingsRepository {
-//        return UserSettingsRepository(context.userDataStore)
-//    }
-
     @Singleton
     @Provides
     fun provideHGDataSource(api: DeemaApi): RemoteDataSource {
         return RemoteDataSourceImpl(api = api)
     }
-
-
 }

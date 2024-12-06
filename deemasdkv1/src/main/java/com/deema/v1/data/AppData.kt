@@ -1,6 +1,7 @@
 package com.deema.v1.data
 
 import android.content.Context
+import com.deema.v1.Environment
 
 class AppData private constructor() {
     companion object {
@@ -24,18 +25,11 @@ class AppData private constructor() {
 
 
 data class SharedData(
-    var token: String? = null,
-    var sdkKey: String? = AppConstants.sdkKey,
-    var purchaseAmount: String? = "20",
+    var environment: Environment? = Environment.Sandbox,
+    var sdkKey: String? = null,
+    var purchaseAmount: String? = "",
     var currency: String? = "KWD",
-    var phone: String? = null,
     var merchantContext: Context? = null,
     var merchantOrderId: String? = null,
     var deemaOrderReference: String? = null,
-    var isAvailable: Boolean = false,
-    var termsAccepted: Boolean = false,
-) {
-    fun clearData() {
-        token = null;
-    }
-}
+)

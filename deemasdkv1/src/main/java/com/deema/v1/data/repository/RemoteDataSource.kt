@@ -7,8 +7,6 @@ import com.deema.v1.data.domian.models.MerchantRequestResponseModel
 import kotlinx.coroutines.flow.Flow
 
 interface RemoteDataSource {
-
     suspend fun merchantDetails(request: MerchantRequest): Flow<DataState<MerchantRequestResponseModel>>
-
 
 }

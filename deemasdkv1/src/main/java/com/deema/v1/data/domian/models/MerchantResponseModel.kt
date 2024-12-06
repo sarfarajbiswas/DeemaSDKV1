@@ -1,5 +1,4 @@
 package com.deema.v1.data.domian.models
-
 import com.google.gson.annotations.SerializedName
 
 

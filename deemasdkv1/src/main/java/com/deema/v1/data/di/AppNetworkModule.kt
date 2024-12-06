@@ -1,9 +1,8 @@
 package com.deema.v1.data.di
 
 import android.content.Context
-import com.deema.v1.data.SessionManager
-import com.deema.v1.data.util.BaseUrl
 import com.deema.v1.data.retrofit.DeemaApi
+import com.deema.v1.data.util.baseUrl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -23,12 +22,8 @@ object AppNetworkModule {
 
     @Singleton
     @Provides
-    fun provideTokenManager(@ApplicationContext context: Context): SessionManager = SessionManager(context)
-
-    @Singleton
-    @Provides
-    fun provideAuthInterceptor(@ApplicationContext context: Context): AuthInterceptor =
-        AuthInterceptor(context)
+    fun provideAuthInterceptor(@ApplicationContext context: Context): ApiInterceptor =
+        ApiInterceptor(context)
 
     /**
      * Provides BaseUrl as string
@@ -36,7 +31,7 @@ object AppNetworkModule {
     @Singleton
     @Provides
     fun provideBaseURL(): String {
-        return BaseUrl.BASE_STAGING_URL
+        return baseUrl()
     }
     /**
      * Provides LoggingInterceptor for api information
@@ -51,7 +46,7 @@ object AppNetworkModule {
      */
     @Singleton
     @Provides
-    fun provideOkHttpClient(authInterceptor: AuthInterceptor, loggingInterceptor: HttpLoggingInterceptor): OkHttpClient {
+    fun provideOkHttpClient(apiInterceptor: ApiInterceptor, loggingInterceptor: HttpLoggingInterceptor): OkHttpClient {
         val okHttpClient = OkHttpClient().newBuilder()
 
         okHttpClient.callTimeout(60, TimeUnit.SECONDS)
@@ -59,8 +54,7 @@ object AppNetworkModule {
         okHttpClient.readTimeout(60, TimeUnit.SECONDS)
         okHttpClient.writeTimeout(60, TimeUnit.SECONDS)
         okHttpClient.addInterceptor(loggingInterceptor)
-        okHttpClient.addInterceptor(authInterceptor)
-
+        okHttpClient.addInterceptor(apiInterceptor)
         okHttpClient.build()
         return okHttpClient.build()
     }
@@ -99,7 +93,7 @@ object AppNetworkModule {
 
     private fun okhttpClient(context: Context): OkHttpClient {
         return OkHttpClient.Builder()
-            .addInterceptor(AuthInterceptor(context))
+            .addInterceptor(ApiInterceptor(context))
             .build()
     }
 }

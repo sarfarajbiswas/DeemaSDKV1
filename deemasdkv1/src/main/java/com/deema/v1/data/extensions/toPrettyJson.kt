@@ -1,4 +1,4 @@
-package com.deema.v1.extensions
+package com.deema.v1.data.extensions
 
 import android.content.res.AssetManager
 import com.google.gson.Gson
