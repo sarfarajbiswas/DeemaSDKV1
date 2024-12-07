@@ -121,7 +121,6 @@ class MainActivity : ComponentActivity() {
                             Button(onClick = {
                                 DeemaSDK.launch(
                                     environment = Environment.Sandbox,
-                                    context = context,
                                     sdkKey = sdkKey,
                                     currency = currency.uppercase(),
                                     purchaseAmount = purchaseAmount,
