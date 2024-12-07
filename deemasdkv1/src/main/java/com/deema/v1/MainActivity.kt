@@ -13,7 +13,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.repeatOnLifecycle
 import com.deema.v1.data.AppData
-import com.deema.v1.data.domian.models.MerchantRequest
+import com.deema.v1.data.domian.models.PurchaseOrderRequest
 import com.deema.v1.ui.theme.DeemaSDKAndroidTheme
 import com.deema.v1.ui.view.WebMerchantView
 import com.deema.v1.util.Event
@@ -53,7 +53,7 @@ class MainActivity : ComponentActivity() {
 
             DeemaSDKAndroidTheme {
                 WebMerchantView(
-                    request = MerchantRequest(
+                    request = PurchaseOrderRequest(
                         merchantOrderId = AppData.getInstance().getSharedData().merchantOrderId!!,
                         amount = AppData.getInstance().getSharedData().purchaseAmount!!,
                         currencyCode = AppData.getInstance().getSharedData().currency!!

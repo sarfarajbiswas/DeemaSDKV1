@@ -1,12 +1,12 @@
 package com.deema.v1.data.repository
 
 
+import com.deema.v1.data.domian.models.PurchaseOrderRequest
 import com.deema.v1.data.util.DataState
-import com.deema.v1.data.domian.models.MerchantRequest
-import com.deema.v1.data.domian.models.MerchantRequestResponseModel
+import com.deema.v1.data.domian.models.PurchaseRequestResponseModel
 import kotlinx.coroutines.flow.Flow
 
 interface RemoteDataSource {
-    suspend fun merchantDetails(request: MerchantRequest): Flow<DataState<MerchantRequestResponseModel>>
+    suspend fun getPurchaseOrder(request: PurchaseOrderRequest): Flow<DataState<PurchaseRequestResponseModel>>
 
 }

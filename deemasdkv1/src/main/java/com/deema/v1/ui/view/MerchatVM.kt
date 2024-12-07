@@ -3,11 +3,9 @@ package com.deema.v1.ui.view
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.deema.v1.data.util.DataState
-import com.deema.v1.data.domian.models.MerchantRequest
-import com.deema.v1.data.domian.models.MerchantRequestResponseData
+import com.deema.v1.data.domian.models.PurchaseDetails
+import com.deema.v1.data.domian.models.PurchaseOrderRequest
 import com.deema.v1.data.repository.RemoteDataSource
-import com.deema.v1.util.Event
-import com.deema.v1.util.EventBus
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -19,7 +17,7 @@ import javax.inject.Inject
 enum class ApiResponse {None, Loading, Success, Error, NoInternet, UnAuthorize }
 
 data class UiState(
-    val merchantRequestResponseData: MerchantRequestResponseData?= null,
+    val merchantRequestResponseData: PurchaseDetails?= null,
     val status: Int = 0,
     val errorMessage: String? = null,
     val apiResponse: ApiResponse = ApiResponse.None,
@@ -40,11 +38,11 @@ class MerchantVM @Inject constructor(private val repository: RemoteDataSource) :
         }
     }
 
-    fun merchantDetails(request: MerchantRequest) {
+    fun merchantDetails(request: PurchaseOrderRequest) {
         Timber.i("loadMerchantData $request")
 
         viewModelScope.launch {
-            repository.merchantDetails(request).collect { state ->
+            repository.getPurchaseOrder(request).collect { state ->
                 when (state) {
                     is DataState.Success -> {
                         state.data?.let { response ->

@@ -24,13 +24,13 @@ import androidx.compose.ui.viewinterop.AndroidView
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.deema.v1.data.AppConstants
-import com.deema.v1.data.domian.models.MerchantRequest
+import com.deema.v1.data.domian.models.PurchaseOrderRequest
 import com.deema.v1.ui.component.AppText
 import com.deema.v1.ui.theme.primaryColor
 import timber.log.Timber
 
 @Composable
-fun WebMerchantView(request: MerchantRequest){
+fun WebMerchantView(request: PurchaseOrderRequest){
     val viewModel = hiltViewModel<MerchantVM>()
 
     val uiState = viewModel.uiState.collectAsStateWithLifecycle().value
