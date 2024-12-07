@@ -14,7 +14,7 @@ import javax.inject.Singleton
 object AppDataModule {
     @Singleton
     @Provides
-    fun provideHGDataSource(api: DeemaApi): RemoteDataSource {
+    fun provideDataSource(api: DeemaApi): RemoteDataSource {
         return RemoteDataSourceImpl(api = api)
     }
 }

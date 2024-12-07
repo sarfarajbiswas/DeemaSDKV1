@@ -13,10 +13,6 @@ object EventBus {
 }
 
 sealed interface Event {
-//    data class SuccessToast(val message: String) : Event
-//    data class ErrorToast(val message: String) : Event
-//    data class WarningToast(val message: String) : Event
-//    data class InfoToast(val message: String) : Event
     data class Error(val message: String) : Event
 }
 

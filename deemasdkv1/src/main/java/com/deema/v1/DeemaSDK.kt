@@ -6,15 +6,10 @@ import android.content.Intent
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContract
 import com.deema.v1.data.AppData
-import com.google.gson.annotations.SerializedName
 
 enum class Environment{
     Sandbox, Production
 }
-
-//enum class PaymentStatus{
-//    Success, Failure, Canceled, Unauthorized ,Unknown,
-//}
 
 sealed interface PaymentStatus {
     data object Success : PaymentStatus
@@ -24,7 +19,7 @@ sealed interface PaymentStatus {
 }
 class DeemaSDK{
     companion object{
-        fun launch(environment: Environment, context: Context, currency: String, purchaseAmount: String, sdkKey: String, merchantOrderId: String, launcher: ActivityResultLauncher<String>){
+        fun launch(environment: Environment, currency: String, purchaseAmount: String, sdkKey: String, merchantOrderId: String, launcher: ActivityResultLauncher<String>){
             val appData = AppData.getInstance().getSharedData()
             appData.environment = environment
             appData.sdkKey = sdkKey ?: ""

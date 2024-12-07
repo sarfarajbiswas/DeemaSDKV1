@@ -34,33 +34,3 @@ fun AppText(
     )
 }
 
-@Composable
-fun AppMultilineText(
-    text: String,
-    style: TextStyle = MaterialTheme.typography.bodySmall.copy(color = black_0),
-    @DrawableRes leadingIconId: Int ? = null,
-    @DrawableRes trailingIconId: Int ? = null,
-    modifier: Modifier = Modifier,
-){
-    Row(verticalAlignment = Alignment.CenterVertically, modifier = modifier, ) {
-
-        leadingIconId?.let {
-            Image(
-                painter = painterResource(id = leadingIconId),
-                modifier = Modifier.size(24.dp).padding(end = 5.dp),
-                contentDescription = null,)
-        }
-
-        Text(
-            text = text,
-            modifier = Modifier.padding(start = 0.dp),
-            style = style,
-        )
-        trailingIconId?.let {
-            Image(
-                painter = painterResource(id = trailingIconId),
-                modifier = Modifier.size(24.dp).padding(start = 5.dp),
-                contentDescription = null,)
-        }
-    }
-}

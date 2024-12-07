@@ -20,7 +20,6 @@ import com.deema.v1.util.Event
 import com.deema.v1.util.EventBus
 import dagger.hilt.android.AndroidEntryPoint
 
-
 data class ErrorUiState(
     val isError: Boolean = false,
     val title: String? = null,
@@ -62,7 +61,7 @@ class MainActivity : ComponentActivity() {
                 )
             }
 
-            /// handle error event5
+            /// handle error events
             if (errorUiState.isError) {
                 MainActivity@this.setResult(RESULT_OK, Intent().apply {
                     putExtra("status", "failure")

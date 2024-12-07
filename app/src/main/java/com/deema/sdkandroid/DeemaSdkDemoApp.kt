@@ -14,5 +14,3 @@ class DeemaSdkDemoApp : MultiDexApplication(){
         Timber.plant(Timber.DebugTree())
     }
 }
-
-//

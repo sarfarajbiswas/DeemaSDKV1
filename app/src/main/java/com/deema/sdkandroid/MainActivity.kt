@@ -1,12 +1,9 @@
 package com.deema.sdkandroid
 
-import android.app.Activity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.result.ActivityResult
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -55,7 +52,6 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             val context = LocalContext.current
-            ///
             var customerPhone by remember { mutableStateOf("96599123444") }
             var currency by remember { mutableStateOf("kwd") }
             var purchaseAmount by remember { mutableStateOf("20") }
