@@ -38,8 +38,8 @@ class MerchantVM @Inject constructor(private val repository: RemoteDataSource) :
         }
     }
 
-    fun merchantDetails(request: PurchaseOrderRequest) {
-        Timber.i("loadMerchantData $request")
+    fun getPurchaseOrder(request: PurchaseOrderRequest) {
+        Timber.i("getPurchaseOrder $request")
 
         viewModelScope.launch {
             repository.getPurchaseOrder(request).collect { state ->

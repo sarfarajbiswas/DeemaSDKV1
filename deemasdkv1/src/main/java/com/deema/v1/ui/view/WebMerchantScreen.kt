@@ -36,7 +36,7 @@ fun WebMerchantView(request: PurchaseOrderRequest){
     val uiState = viewModel.uiState.collectAsStateWithLifecycle().value
 
     LaunchedEffect(Unit){
-        viewModel.merchantDetails(
+        viewModel.getPurchaseOrder(
             request = request
         )
     }
