@@ -24,7 +24,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.deema.sdkandroid.ui.theme.DeemaSDKAndroidTheme
@@ -40,18 +39,17 @@ class MainActivity : ComponentActivity() {
         val deemaLauncher = registerForActivityResult(DeemaSDKResult()) { result ->
             println("result: $result")
             when(result) {
-                is PaymentStatus.Success -> Toast.makeText(this, "Success", Toast.LENGTH_LONG).show()
+                is PaymentStatus.Success -> Toast.makeText(MainActivity@this, "Success", Toast.LENGTH_LONG).show()
 
-                is PaymentStatus.Canceled -> Toast.makeText(this, "Canceled", Toast.LENGTH_LONG).show()
+                is PaymentStatus.Canceled -> Toast.makeText(MainActivity@this, "Canceled", Toast.LENGTH_LONG).show()
 
-                is PaymentStatus.Failure -> Toast.makeText(this, "Failure: ${result.message}", Toast.LENGTH_LONG).show()
+                is PaymentStatus.Failure -> Toast.makeText(MainActivity@this, "Failure: ${result.message}", Toast.LENGTH_LONG).show()
 
-                is PaymentStatus.Unknown -> Toast.makeText(this, "Unknown: ${result.message}", Toast.LENGTH_LONG).show()
+                is PaymentStatus.Unknown -> Toast.makeText(MainActivity@this, "Unknown: ${result.message}", Toast.LENGTH_LONG).show()
             }
         }
 
         setContent {
-            val context = LocalContext.current
             var customerPhone by remember { mutableStateOf("96599123444") }
             var currency by remember { mutableStateOf("kwd") }
             var purchaseAmount by remember { mutableStateOf("20") }

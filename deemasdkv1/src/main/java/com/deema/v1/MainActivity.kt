@@ -13,12 +13,13 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.repeatOnLifecycle
 import com.deema.v1.data.AppData
+import com.deema.v1.data.di.AppNetworkModule
+import com.deema.v1.data.di.AppNetworkModuleImpl
 import com.deema.v1.data.domian.models.PurchaseOrderRequest
 import com.deema.v1.ui.theme.DeemaSDKAndroidTheme
 import com.deema.v1.ui.view.WebMerchantView
 import com.deema.v1.util.Event
 import com.deema.v1.util.EventBus
-import dagger.hilt.android.AndroidEntryPoint
 
 data class ErrorUiState(
     val isError: Boolean = false,
@@ -26,10 +27,16 @@ data class ErrorUiState(
     val message: String? = null,
 )
 
-@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+
+    companion object {
+        lateinit var appModule: AppNetworkModule
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        appModule = AppNetworkModuleImpl(this)
 
         enableEdgeToEdge()
 
@@ -68,8 +75,6 @@ class MainActivity : ComponentActivity() {
                     putExtra("message", errorUiState.message)
                 })
                 MainActivity@this.finish()
-
-                errorUiState = errorUiState.copy(isError = false)
             }
         }
     }

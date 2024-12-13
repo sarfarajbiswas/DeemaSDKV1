@@ -11,12 +11,14 @@ enum class Environment{
     Sandbox, Production
 }
 
-sealed interface PaymentStatus {
+ sealed interface PaymentStatus {
     data object Success : PaymentStatus
     data object Canceled : PaymentStatus
     data class Failure(val message: String?) : PaymentStatus
     data class Unknown(val message: String?) : PaymentStatus
 }
+
+
 class DeemaSDK{
     companion object{
         fun launch(environment: Environment, currency: String, purchaseAmount: String, sdkKey: String, merchantOrderId: String, launcher: ActivityResultLauncher<String>){

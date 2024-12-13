@@ -1,9 +1,9 @@
 plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.jetbrains.kotlin.android)
-    alias(libs.plugins.hilt.android)
     alias(libs.plugins.kotlin.serialization)
     id("kotlin-kapt")
+    id("maven-publish")
 }
 
 android {
@@ -11,7 +11,7 @@ android {
     compileSdk = 35
 
     defaultConfig {
-        minSdk = 24
+        minSdk = 21
         //targetSdk = 34
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -21,7 +21,7 @@ android {
 
     buildTypes {
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -48,6 +48,7 @@ android {
     }
 }
 
+
 dependencies {
 
     implementation(libs.androidx.core.ktx)
@@ -70,7 +71,6 @@ dependencies {
     implementation(libs.androidx.multidex)
     implementation (libs.androidx.material3.windowsizeclass)
 
-
     ///
     implementation(libs.coil.compose)
 
@@ -78,15 +78,7 @@ dependencies {
     implementation(libs.androidx.navigation.compose)
     implementation(libs.kotlinx.serialization.json)
 
-    // Hilt
-    implementation(libs.hilt.android)
-    implementation(libs.androidx.hilt.navigation.compose)
-    kapt(libs.hilt.android.compiler)
     implementation (libs.androidx.lifecycle.viewmodel.ktx)
-    //implementation (libs.androidx.lifecycle.runtime.ktx.v262)
-
-    ///data
-    implementation (libs.androidx.datastore.preferences)
 
     //network call
     // Retrofit
@@ -100,10 +92,18 @@ dependencies {
 
     ///
     implementation (libs.timber)
-//    implementation (libs.androidx.material.icons.extended)
-//    implementation(libs.androidx.datastore.preferences)
     implementation(libs.gson)
+}
 
-    ///youtube
-    implementation(libs.core)
+publishing {
+    publications {
+        register<MavenPublication>("release") {
+            afterEvaluate {
+                from(components["release"])
+                groupId = "com.deema.v1"
+                artifactId = "deema-sdk-v1"
+                version = "1.0"
+            }
+        }
+    }
 }

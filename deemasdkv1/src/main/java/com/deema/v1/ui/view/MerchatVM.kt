@@ -6,13 +6,11 @@ import com.deema.v1.data.util.DataState
 import com.deema.v1.data.domian.models.PurchaseDetails
 import com.deema.v1.data.domian.models.PurchaseOrderRequest
 import com.deema.v1.data.repository.RemoteDataSource
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import timber.log.Timber
-import javax.inject.Inject
 
 enum class ApiResponse {None, Loading, Success, Error, NoInternet, UnAuthorize }
 
@@ -24,8 +22,7 @@ data class UiState(
     )
 
 
-@HiltViewModel
-class MerchantVM @Inject constructor(private val repository: RemoteDataSource) : ViewModel(){
+class MerchantVM(private val repository: RemoteDataSource) : ViewModel(){
 
     var uiState = MutableStateFlow(UiState())
         private set

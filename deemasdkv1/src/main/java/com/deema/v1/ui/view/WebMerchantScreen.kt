@@ -21,8 +21,9 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.deema.v1.MainActivity
 import com.deema.v1.data.AppConstants
 import com.deema.v1.data.domian.models.PurchaseOrderRequest
 import com.deema.v1.ui.component.AppText
@@ -31,7 +32,11 @@ import timber.log.Timber
 
 @Composable
 fun WebMerchantView(request: PurchaseOrderRequest){
-    val viewModel = hiltViewModel<MerchantVM>()
+    val viewModel = viewModel<MerchantVM>(
+        factory = viewModelFactory {
+            MerchantVM(MainActivity.appModule.remoteDataSource)
+        }
+    )
 
     val uiState = viewModel.uiState.collectAsStateWithLifecycle().value
 

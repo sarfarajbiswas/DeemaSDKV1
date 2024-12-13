@@ -8,9 +8,8 @@ import com.deema.v1.data.retrofit.DeemaApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import timber.log.Timber
-import javax.inject.Inject
 
-class RemoteDataSourceImpl @Inject constructor(private val api: DeemaApi) :
+class RemoteDataSourceImpl(private val api: DeemaApi) :
     RemoteDataSource {
 
     override suspend fun getPurchaseOrder(request: PurchaseOrderRequest): Flow<DataState<PurchaseRequestResponseModel>> = flow {

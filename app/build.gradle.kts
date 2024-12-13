@@ -1,7 +1,6 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
-    alias(libs.plugins.hilt.android)
     alias(libs.plugins.kotlin.serialization)
     id("kotlin-kapt")
 }
@@ -12,7 +11,7 @@ android {
 
     defaultConfig {
         applicationId = "com.deema.sdkandroid"
-        minSdk = 24
+        minSdk = 21
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -25,7 +24,7 @@ android {
 
     buildTypes {
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -71,16 +70,6 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
-    ///
-    // Hilt
-    implementation(libs.hilt.android)
-    implementation(libs.androidx.hilt.navigation.compose)
-    kapt(libs.hilt.android.compiler)
-    implementation (libs.androidx.lifecycle.viewmodel.ktx)
-
-    ///data
-    implementation(libs.androidx.multidex)
-
     //network call
     // Retrofit
     implementation(libs.retrofit)
@@ -93,10 +82,7 @@ dependencies {
 
     ///
     implementation (libs.timber)
-//    implementation (libs.androidx.material.icons.extended)
-//    implementation(libs.androidx.datastore.preferences)
     implementation(libs.gson)
-
 
     ///libs
     implementation(project(":deemasdkv1"))
