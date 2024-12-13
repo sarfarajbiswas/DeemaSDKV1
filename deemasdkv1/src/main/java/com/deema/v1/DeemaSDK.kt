@@ -6,12 +6,11 @@ import android.content.Intent
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContract
 import com.deema.v1.data.AppData
-
-enum class Environment{
+ enum class Environment{
     Sandbox, Production
 }
 
- sealed interface PaymentStatus {
+sealed interface PaymentStatus {
     data object Success : PaymentStatus
     data object Canceled : PaymentStatus
     data class Failure(val message: String?) : PaymentStatus
@@ -19,7 +18,8 @@ enum class Environment{
 }
 
 
-class DeemaSDK{
+open class DeemaSDK{
+
     companion object{
         fun launch(environment: Environment, currency: String, purchaseAmount: String, sdkKey: String, merchantOrderId: String, launcher: ActivityResultLauncher<String>){
             val appData = AppData.getInstance().getSharedData()
@@ -35,9 +35,9 @@ class DeemaSDK{
 }
 
 
-class DeemaSDKResult: ActivityResultContract<String, PaymentStatus>(){
+open class DeemaSDKResult: ActivityResultContract<String, PaymentStatus>(){
     override fun createIntent(context: Context, input: String): Intent {
-        return Intent(context, MainActivity::class.java).putExtra("input", input)
+        return Intent(context, DeemaActivity::class.java).putExtra("input", input)
     }
     override fun parseResult(resultCode: Int, intent: Intent?): PaymentStatus {
         if (resultCode == Activity.RESULT_OK) {
@@ -55,4 +55,3 @@ class DeemaSDKResult: ActivityResultContract<String, PaymentStatus>(){
         return PaymentStatus.Unknown("Unknown error")
     }
 }
-

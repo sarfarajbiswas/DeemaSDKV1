@@ -27,7 +27,7 @@ data class ErrorUiState(
     val message: String? = null,
 )
 
-class MainActivity : ComponentActivity() {
+class DeemaActivity : ComponentActivity() {
 
     companion object {
         lateinit var appModule: AppNetworkModule
@@ -36,7 +36,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        appModule = AppNetworkModuleImpl(this)
+        appModule = AppNetworkModuleImpl(DeemaActivity@this)
 
         enableEdgeToEdge()
 

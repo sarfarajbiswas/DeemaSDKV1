@@ -23,7 +23,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.deema.v1.MainActivity
+import com.deema.v1.DeemaActivity
 import com.deema.v1.data.AppConstants
 import com.deema.v1.data.domian.models.PurchaseOrderRequest
 import com.deema.v1.ui.component.AppText
@@ -34,7 +34,7 @@ import timber.log.Timber
 fun WebMerchantView(request: PurchaseOrderRequest){
     val viewModel = viewModel<MerchantVM>(
         factory = viewModelFactory {
-            MerchantVM(MainActivity.appModule.remoteDataSource)
+            MerchantVM(DeemaActivity.appModule.remoteDataSource)
         }
     )
 

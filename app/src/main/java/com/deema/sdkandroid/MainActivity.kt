@@ -36,6 +36,8 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        print("Environment ${Environment.Sandbox}")
+
         val deemaLauncher = registerForActivityResult(DeemaSDKResult()) { result ->
             println("result: $result")
             when(result) {

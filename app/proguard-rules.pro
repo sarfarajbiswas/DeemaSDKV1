@@ -22,4 +22,10 @@
 
 # Please add these rules to your existing keep rules in order to suppress warnings.
 # This is generated automatically by the Android Gradle plugin.
--dontwarn com.deema.v1.**
+#-dontwarn com.deemaxß.v1.**
+#-keep class com.deema.v1.DeemaSDKResult
+
+# Please add these rules to your existing keep rules in order to suppress warnings.
+# This is generated automatically by the Android Gradle plugin.
+-keep class * extends com.google.protobuf.GeneratedMessageLite { *; }
+-keep,allowobfuscation,allowshrinking class kotlin.coroutines.Continuation
