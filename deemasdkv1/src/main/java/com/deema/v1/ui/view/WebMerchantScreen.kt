@@ -122,9 +122,9 @@ fun WebViewPage(viewModel: MerchantVM, urlString: String){
                     Timber.d("shouldOverrideUrlLoading: $url")
 
                     if (url != null) {
-                        if (url == AppConstants.successUrl) {
+                        if (url.contains(AppConstants.successUrl)) {
                             viewModel.changePaymentStatus(1)
-                        } else if (url == AppConstants.failureUrl) {
+                        } else if (url.contains(AppConstants.failureUrl)) {
                             viewModel.changePaymentStatus(2)
                         }
 
