@@ -83,5 +83,6 @@ dependencies {
     implementation(libs.gson)
 
     ///libs
-    implementation(project(":deemasdkv1"))
+    implementation( "com.github.sarfarajbiswas:DeemaSDKV1:1.0")
+    //implementation(project(":deemasdkv1"))
 }

@@ -22,4 +22,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "DeemaSDKAndroid"
 include(":app")
-include(":deemasdkv1")
+//include(":deemasdkv1")
